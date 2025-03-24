@@ -77,3 +77,17 @@
   align-items: center;
   letter-spacing: 1.5px;
 }
+
+@media screen and (max-width: 586px) {
+  .login-container {
+    flex-direction: column;
+    gap: 5px;
+  }
+  .login-banner {
+    width: 200px;
+  }
+  .login-form-section {
+    width: 100%;
+    margin: 0px auto;
+  }
+}

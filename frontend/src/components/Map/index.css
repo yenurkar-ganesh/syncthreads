@@ -16,5 +16,18 @@
   align-items: center;
   border-radius: 18px;
   height: 90vh;
+}
 
+@media screen and (max-width: 586px) {
+  .map-header-title {
+    font-size: 25px;
+  }
+  .map-icon {
+    width: 45px;
+    border-radius: 8px;
+  }
+  .country-map-container {
+    width: 95%;
+    height: 65%;
+  }
 }

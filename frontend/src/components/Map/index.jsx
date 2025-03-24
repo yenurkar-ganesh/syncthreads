@@ -73,7 +73,7 @@ const Map = () => {
     <div className="map-container">
       <Navbar />
       <div className="map-header-section d-flex align-items-center">
-        <h1>Map - {mapDetails.title}</h1>
+        <h1 className="map-header-title">Map - {mapDetails.title}</h1>
         <img
           className="map-icon"
           src={parsedData.flag_url}
