@@ -1,0 +1,20 @@
+.map-container {
+  padding: 25px;
+}
+.map-header-section {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.map-icon {
+  width: 70px;
+  border-radius: 8px;
+}
+.country-map-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 18px;
+  height: 90vh;
+
+}

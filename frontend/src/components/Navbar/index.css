@@ -2,15 +2,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 100px;
+  gap: 50px;
   top: 0;
   border-bottom: 1px solid lightgray;
   padding: 8px 24px;
 }
-.logo-heading{
+.logo-heading {
   font-size: 28px;
   font-weight: 900;
-
 }
 .nav-list {
   display: flex;
@@ -30,4 +29,17 @@
   border: none;
   cursor: pointer;
   background-color: rgba(0, 123, 255, 0.9);
+}
+.nav-link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 586px) {
+  .logo-heading {
+    font-size: 16px;
+  }
+  .logout-btn {
+    font-size: 14px;
+  }
 }

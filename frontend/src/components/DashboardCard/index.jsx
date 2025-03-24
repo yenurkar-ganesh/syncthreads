@@ -6,7 +6,7 @@ const DashboardCard = ({ eachCard }) => {
   const parsedData = JSON.parse(data);
 
   return (
-    <Link className="card-link" to={`/map/${title}/:${id}`}>
+    <Link className="card-link" to={`/map/${id}`}>
       <li className="dashboard-card">
         <img className="card-flag-icon" src={parsedData.flag_url} alt={title} />
         <div className="card-header ">

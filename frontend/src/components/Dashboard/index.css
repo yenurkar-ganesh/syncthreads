@@ -13,3 +13,17 @@
   flex-wrap: wrap;
   gap: 18px;
 }
+
+@media screen and (max-width: 586px) {
+  .dashboard-heading {
+    font-size: 26px;
+    line-height: 1.9rem;
+  }
+  .card-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}

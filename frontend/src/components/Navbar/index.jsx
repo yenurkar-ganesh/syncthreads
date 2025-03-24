@@ -11,14 +11,10 @@ const Navbar = () => {
   };
   return (
     <nav className="navbar">
-      <h1 className="logo-heading">SyncThreads</h1>
+      <Link className="nav-link" to={"/dashboard"}>
+        <h1 className="logo-heading">SyncThreads</h1>
+      </Link>
       <ul className="nav-list">
-        <li className="nav-list-item">
-          <Link className="nav-link" to="/map">
-            <p>Map</p>
-          </Link>
-        </li>
-
         <li className="nav-list-item">
           <button className="logout-btn" type="button" onClick={logoutHandler}>
             LOGOUT
