@@ -1,0 +1,34 @@
+.dashboard-card {
+  list-style: none;
+  width: 360px;
+  color: rgb(224, 225, 221);
+  border-radius: 21px;
+  padding: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+.card-link {
+  text-decoration: none;
+}
+.dashboard-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+  background-color: #3a3a3a;
+  cursor: pointer;
+}
+.card-title {
+  font-size: 21px;
+  font-weight: 600;
+}
+.card-flag-icon {
+  width: 100%;
+  height: 25vh;
+  object-fit: cover;
+  border-radius: 21px;
+}
+.card-header {
+  margin-top: 9px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

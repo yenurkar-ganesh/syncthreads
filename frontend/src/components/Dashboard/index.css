@@ -1,0 +1,15 @@
+.dashboard-content-section {
+  padding: 20px;
+}
+.dashboard-heading {
+  text-align: center;
+  font-family: "Termina Test", sans-serif;
+}
+.card-section {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+}

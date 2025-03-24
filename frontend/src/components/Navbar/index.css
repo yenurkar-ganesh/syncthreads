@@ -7,12 +7,27 @@
   border-bottom: 1px solid lightgray;
   padding: 8px 24px;
 }
+.logo-heading{
+  font-size: 28px;
+  font-weight: 900;
+
+}
 .nav-list {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 18px;
 }
-.nav-list-item{
-    list-style: none;
+.nav-list-item {
+  list-style: none;
+}
+.logout-btn {
+  padding: 8px 24px;
+  font-weight: 500;
+  color: #f2f7f2;
+  border-radius: 6px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(0, 123, 255, 0.9);
 }

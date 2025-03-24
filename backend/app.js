@@ -90,32 +90,29 @@ app.get("/cards/:id", async (req, res) => {
 
 // add card info
 app.post("/api/new-card", async (req, res) => {
-  const { type, title, description, data } = req.query;
-
+  const { type, title, description, data } = req.body;
   if (!type || !title || !data) {
     return res
       .status(400)
       .json({ error: "Type, title, and data are required." });
   }
-
+  let dataString;
   try {
-    await new Promise((resolve, reject) => {
-      db.run(
-        "INSERT INTO cards (type, title, description, data) VALUES (?, ?, ?, ?)",
-        [type, title, description || "", JSON.stringify(data)],
-        function (err) {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(this.lastID);
-          }
-        }
-      );
-    });
-    res.status(201).send("Card is created successfully.");
+    dataString = JSON.stringify(data);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(400).json({ error: "Invalid JSON format in data." });
   }
+
+  await db.run(
+    "INSERT INTO cards (type, title, description, data) VALUES (?, ?, ?, ?)",
+    [type, title, description || "", dataString],
+    function (err) {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      res.status(201).send("Card is created successfully.");
+    }
+  );
 });
 
 const initializeDatabase = async () => {
