@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sqlite3 = require("sqlite3");
 const { open } = require("sqlite");
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
@@ -11,10 +12,16 @@ let db;
 
 // Middleware
 app.use(express.json());
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:5173",
+  })
+);
 
 // user login
 app.post("/login", async (req, res) => {
-  const { username, password } = req.query; 
+  const { username, password } = req.body;
   try {
     const user = await db.get(`SELECT * FROM users WHERE username = ?`, [
       username,
@@ -22,7 +29,7 @@ app.post("/login", async (req, res) => {
     if (!user) {
       return res.status(400).send("Invalid User");
     }
-    const validatePassword =  bcrypt.compare(password, user.password);
+    const validatePassword = bcrypt.compare(password, user.password);
     if (!validatePassword) {
       return res.status(400).send("Invalid Password");
     }
@@ -38,7 +45,7 @@ app.post("/login", async (req, res) => {
 
 // Register user
 app.post("/register", async (req, res) => {
-  const { username, password, name } = req.query;
+  const { username, password, name } = req.body;
   try {
     const isUserExist = await db.get(`SELECT * FROM users WHERE username = ?`, [
       username,
@@ -55,6 +62,59 @@ app.post("/register", async (req, res) => {
   } catch (error) {
     console.error(` Error while creating user:`, error.message);
     res.status(500).send("Internal server error");
+  }
+});
+
+// get all cards
+app.get("/api/cards", async (req, res) => {
+  const cards = await db.all("select * from cards");
+  if (!cards) {
+    return res.status(400).status(`No cards found`);
+  }
+  return res.status(200).send(cards);
+});
+
+// Specific card details
+app.get("/cards/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const cardDetails = await db.get(`select * from cards where id=${id}`);
+    if (!cardDetails) {
+      return res.status(400).send(`Card details is not found`);
+    }
+    res.status(200).send(cardDetails);
+  } catch (error) {
+    console.error("Error while fetching card details ", error);
+  }
+});
+
+// add card info
+app.post("/api/new-card", async (req, res) => {
+  const { type, title, description, data } = req.query;
+
+  if (!type || !title || !data) {
+    return res
+      .status(400)
+      .json({ error: "Type, title, and data are required." });
+  }
+
+  try {
+    await new Promise((resolve, reject) => {
+      db.run(
+        "INSERT INTO cards (type, title, description, data) VALUES (?, ?, ?, ?)",
+        [type, title, description || "", JSON.stringify(data)],
+        function (err) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(this.lastID);
+          }
+        }
+      );
+    });
+    res.status(201).send("Card is created successfully.");
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
